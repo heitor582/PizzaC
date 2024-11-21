@@ -7,7 +7,7 @@ void menu();
 void cleanTerminal();
 
 int main() {
-    menu();
+     menu();
 }
 
 void cleanTerminal() {
