@@ -1,0 +1,9 @@
+*.o
+pizza
+/build/
+/bin/
+/obj/
+.vscode/
+.idea/
+*.log
+*.tmp
