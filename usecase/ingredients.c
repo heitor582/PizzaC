@@ -46,7 +46,7 @@ void updateIngredientUseCase(){
     char nameForUpdate[NAME_SIZE];
     printf("Digite o ingrediente que quer alterar: ");
     fgets(nameForUpdate, NAME_SIZE, stdin);
-    //TODO: remove /n on i.name
+    nameForUpdate[strcspn(nameForUpdate, "\n")] = '\0';
     Ingredient *ingredient = searchIngredientByName(nameForUpdate);
 
     if(ingredient == NULL){

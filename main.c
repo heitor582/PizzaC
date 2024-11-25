@@ -31,6 +31,7 @@ void menu() {
         printf("6 - Ver todos os ingredientes\n");
         printf("7 - Atualizar um ingrediente\n");
         printf("8 - Deletar um ingrediente\n");
+        printf("9 - Vender pizza\n");
         printf("Escolha uma opção: ");
 
         scanf("%d", &value);
@@ -87,6 +88,12 @@ void menu() {
                 deleteIngredientUseCase();
                 printf("\n");
                 break;
+            case 9: 
+                cleanTerminal();
+                printf("Vender pizza selecionado.\n");
+
+                //TODO
+
             default:
                 cleanTerminal();
                 printf("Opção inválida. Tente novamente.\n");

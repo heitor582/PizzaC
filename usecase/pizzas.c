@@ -78,7 +78,8 @@ void updatePizzaUseCase() {
     char flavorForUpdate[NAME_SIZE];
     printf("Digite o sabor da pizza que quer alterar: ");
     fgets(flavorForUpdate, NAME_SIZE, stdin);
-    //TODO: remove /n on p.name
+    flavorForUpdate[strcspn(flavorForUpdate, "\n")] = '\0';
+
     Pizza *pizza = searchPizzaByFlavor(flavorForUpdate);
 
     if(pizza == NULL){
@@ -131,3 +132,78 @@ void updatePizzaUseCase() {
     updatePizza(*pizza);
     free(pizza);
 }
+
+void sellPizza() {
+    printPizzasUseCase();
+
+    int procura_id, count;
+    printf("Selecione o ID da pizza que quer vender: ");
+    scanf("%d", &procura_id);
+
+    Pizza *pizzas = getAllPizzas(&count);
+    Pizza *foundPizza = NULL;
+
+    for (int i = 0; i < count && foundPizza == NULL; i++) {
+        if (procura_id == pizzas[i].id) {
+            foundPizza = &pizzas[i];
+        }
+    }
+
+    if (foundPizza == NULL) {
+        printf("Pizza não encontrada.\n");
+        free(pizzas);
+        return;
+    }
+
+    char addIngredients;
+    float precoExtra = 0;
+
+    printf("Deseja adicionar ingredientes extras? (s/n): ");
+    scanf(" %c", &addIngredients);
+
+    if (addIngredients == 'S' || addIngredients == 's') {
+        int idIngredients = -1, quantidade, ingredientCount;
+        Ingredient *ingredients = getAllIngredients(&ingredientCount);
+
+        while (idIngredients != 0) {
+            printIngredientsUseCase();
+            printf("Digite o ID do ingrediente que deseja adicionar (0 para finalizar): ");
+            scanf("%d", &idIngredients);
+
+            if (idIngredients != 0) {
+                Ingredient *foundIngredient = NULL;
+
+                for (int i = 0; i < ingredientCount && foundIngredient == NULL; i++) {
+                    if (idIngredients == ingredients[i].id) {
+                        foundIngredient = &ingredients[i];
+                    }
+                }
+
+                if (foundIngredient == NULL) {
+                    printf("Ingrediente não encontrado.\n");
+                }
+                
+                printf("Digite a quantidade do ingrediente adicional: ");
+                scanf("%d", &quantidade);
+
+                if (quantidade < 0) {
+                    printf("Quantidade inválida. Tente novamente.\n");
+                }
+
+                    float custoIngrediente = foundIngredient->extraPrice * quantidade;
+                    precoExtra += custoIngrediente;
+            }
+        }
+
+        free(ingredients);
+    }
+
+    float precoFinal = foundPizza->price + precoExtra;
+    printf("\nResumo do pedido:\n");
+    printf("Pizza: %s (R$ %.2f)\n", foundPizza->flavor, foundPizza->price);
+    printf("Adicionais: R$ %.2f\n", precoExtra);
+    printf("Total a pagar: R$ %.2f\n", precoFinal);
+
+    free(pizzas);
+}
+
