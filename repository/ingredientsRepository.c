@@ -7,16 +7,17 @@ Ingredient* getAllIngredientsByIdIn(int ids[], int count) {
     int allIngredientsCount;
     Ingredient *ingredients = getAllIngredients(&allIngredientsCount);
     Ingredient *filteredIngredients = (Ingredient *) malloc(sizeof(Ingredient)*count);
+    if (filteredIngredients == NULL) {
+        perror("Error allocating array");
+        exit(1);
+    }
 
     for(int i = 0; i<allIngredientsCount; i++){
         for (int j = 0; j < count; j++){
             if(ids[j] == ingredients[i].id){
-                filteredIngredients[j].id = ingredients[i].id;
-                strcpy(filteredIngredients[j].name, ingredients[i].name);
-                filteredIngredients[j].extraPrice = ingredients[i].extraPrice;
+                filteredIngredients[j] = ingredients[i];
             }
         }
-        
     }
     free(ingredients);
     return filteredIngredients;
@@ -125,13 +126,18 @@ Ingredient* searchIngredientByName(char name[NAME_SIZE]) {
     Ingredient *ingredients = getAllIngredients(&count);
     for (int i =0; i<count; i++) {
         if(strcmp(ingredients[i].name, name) == 0){
-            return &ingredients[i];
+            Ingredient *found = malloc(sizeof(Ingredient));
+            if (found != NULL) {
+                *found = ingredients[i];
+            }
+            free(ingredients);
+            return found; 
         }
     }
 
     free(ingredients);    
     return NULL;
-};
+}
 
 void updateIngredient(Ingredient ingredient) {
     int count;
@@ -139,12 +145,12 @@ void updateIngredient(Ingredient ingredient) {
 
     for (int i = 0; i < count; i++) {
         if(ingredients[i].id == ingredient.id){
-            stpcpy(ingredients[i].name,ingredient.name);
-            for (int j = 0; j < 50; j++) {
+            strcpy(ingredients[i].name,ingredient.name);
             ingredients[i].extraPrice = ingredient.extraPrice;
         }
     }
 
+    saveIngredients(ingredients, count);
     free(ingredients);
     return;
 };

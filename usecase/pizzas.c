@@ -13,13 +13,15 @@ void printPizzasUseCase() {
         printf("Sabor: %s\n", pizza.flavor);
         printf("Sabor: %c\n", pizza.size);
         printf("Preço: R$%.2f\n\n", pizza.price);
-        printf("Com ingredientes: \n");
-        Ingredient *ingredients = getAllIngredientsByIdIn(pizza.ingredients, pizza.ingredientsSize);
-        for (int i =0; i<pizza.ingredientsSize; i++) {
-            printf("\t%s\n", ingredients[i].name);
+        if(pizza.ingredientsSize >0){
+            printf("Com ingredientes: \n");
+            Ingredient *ingredients = getAllIngredientsByIdIn(pizza.ingredients, pizza.ingredientsSize);
+            for (int i =0; i<pizza.ingredientsSize; i++) {
+                printf("\t%s\n", ingredients[i].name);
+            }
+            free(ingredients);
+            printf("\n");
         }
-        free(ingredients);
-        printf("\n");
     }
     
     printf("\n");
@@ -36,28 +38,33 @@ void createPizzaUseCase() {
 
     printf("Digite o preço da pizza: ");
     scanf("%f", &pizza.price);
-    printf("\n");
 
     char pizza_size;
     printf("Digite o tamanho da pizza: ");
-    scanf("%c", &pizza_size);
-    printf("\n");
+    scanf(" %c", &pizza_size);
+    
     if(pizza_size != P && pizza_size != M && pizza_size != G){
         printf("Não existe esse tamanho");
         return;
     }
     pizza.size=pizza_size;
 
-    printf("Escreva o id do ingrediente que você quer adicionar na pizza ou digite 0 para sair: \n");
+    printf("Escreva o id do ingrediente que você quer adicionar na pizza ou digite 0 para sair: \n\n");
     printIngredientsUseCase();
 
     int value;
     printf("Ingrediente ID: ");
     scanf("%d", &value);
     while (value != 0) {
-        pizza.ingredients[pizza.ingredientsSize]=value;
-        pizza.ingredientsSize++;
-
+        int values[] = {value};
+        Ingredient *ingredient = getAllIngredientsByIdIn(values, 1);
+        if(ingredient != NULL){
+            pizza.ingredients[pizza.ingredientsSize]=value;
+            pizza.ingredientsSize++;
+        } else {
+            printf("Ingrediente não existe");
+        }
+        
         printf("Ingrediente ID: ");
         scanf("%d", &value);
     }
@@ -75,6 +82,7 @@ void deletePizzaUseCase() {
 }
 
 void updatePizzaUseCase() {
+    while (getchar() != '\n');
     char flavorForUpdate[NAME_SIZE];
     printf("Digite o sabor da pizza que quer alterar: ");
     fgets(flavorForUpdate, NAME_SIZE, stdin);
@@ -84,7 +92,6 @@ void updatePizzaUseCase() {
 
     if(pizza == NULL){
         printf("Pizza de sabor %s não encontrada", flavorForUpdate);
-        free(pizza);
         return;
     }
 
@@ -96,6 +103,7 @@ void updatePizzaUseCase() {
         printf("2 - Atualizar valor da pizza\n");
         printf("3 - Adicionar ingredientes à pizza\n");
         printf("4 - Remover ingredientes da pizza\n");
+        printf("Escolha uma opção: ");
         scanf("%d", &value);
         switch(value) {
             case 0:
@@ -104,7 +112,11 @@ void updatePizzaUseCase() {
             case 1:
                 printf("Opção selecionada: Atualizar sabor da pizza.\n");
                 printf("Digite o sabor da pizza: ");
-                fgets(pizza->flavor, NAME_SIZE, stdin);
+                while (getchar() != '\n');
+                char newFlavor[NAME_SIZE];
+                fgets(newFlavor, NAME_SIZE, stdin);
+                newFlavor[strcspn(newFlavor, "\n")] = '\0';
+                strcpy(pizza->flavor, newFlavor);
                 printf("\n");
                 break;
             case 2:
@@ -115,12 +127,33 @@ void updatePizzaUseCase() {
                 break;
             case 3:
                 printf("Opção selecionada: Adicionar ingredientes à pizza.\n");
-                //TODO: Fazer
+                printIngredientsUseCase();
+                int idIngrediente;
+                scanf("%d", &idIngrediente);
+                if(pizza->ingredientsSize == INGREDIENTS_SIZE){
+                    printf("A quantidade de ingredientes da pizza já está no maximo");
+                    return;
+                }
+                pizza->ingredients[pizza->ingredientsSize] = idIngrediente;
+                pizza->ingredientsSize++;
                 printf("\n");
                 break;
             case 4:
                 printf("Opção selecionada: Remover ingredientes da pizza.\n");
-                //TODO: Fazer
+                printIngredientsUseCase();
+                int idIngredienteRemove;
+                scanf("%d", &idIngredienteRemove);
+                if(pizza->ingredientsSize == 0){
+                    printf("A quantidade de ingredientes da pizza já está no minimo");
+                    return;
+                }
+                for(int i = 0; i<pizza->ingredientsSize; i++){
+                    if(pizza->ingredients[i] == idIngredienteRemove){
+                        pizza->ingredients[i] = pizza->ingredients[pizza->ingredientsSize];
+                    }
+                }
+                pizza->ingredients[pizza->ingredientsSize] = 0;
+                pizza->ingredientsSize--;
                 printf("\n");
                 break;
             default:
@@ -128,12 +161,11 @@ void updatePizzaUseCase() {
         }
     } while(value != 0);
 
-
     updatePizza(*pizza);
     free(pizza);
 }
 
-void sellPizza() {
+void sellPizzaUseCase() {
     printPizzasUseCase();
 
     int procura_id, count;
@@ -165,24 +197,22 @@ void sellPizza() {
         int idIngredients = -1, quantidade, ingredientCount;
         Ingredient *ingredients = getAllIngredients(&ingredientCount);
 
+        printIngredientsUseCase();
+        printf("Digite o ID do ingrediente que deseja adicionar (0 para finalizar): ");
+        scanf("%d", &idIngredients);
+
         while (idIngredients != 0) {
-            printIngredientsUseCase();
-            printf("Digite o ID do ingrediente que deseja adicionar (0 para finalizar): ");
-            scanf("%d", &idIngredients);
+            Ingredient *foundIngredient = NULL;
 
-            if (idIngredients != 0) {
-                Ingredient *foundIngredient = NULL;
-
-                for (int i = 0; i < ingredientCount && foundIngredient == NULL; i++) {
-                    if (idIngredients == ingredients[i].id) {
-                        foundIngredient = &ingredients[i];
-                    }
+            for (int i = 0; i < ingredientCount && foundIngredient == NULL; i++) {
+                if (idIngredients == ingredients[i].id) {
+                    foundIngredient = &ingredients[i];
                 }
+            }
 
-                if (foundIngredient == NULL) {
-                    printf("Ingrediente não encontrado.\n");
-                }
-                
+            if (foundIngredient == NULL) {
+                printf("Ingrediente não encontrado.\n");
+            } else {
                 printf("Digite a quantidade do ingrediente adicional: ");
                 scanf("%d", &quantidade);
 
@@ -190,11 +220,13 @@ void sellPizza() {
                     printf("Quantidade inválida. Tente novamente.\n");
                 }
 
-                    float custoIngrediente = foundIngredient->extraPrice * quantidade;
-                    precoExtra += custoIngrediente;
+                precoExtra += foundIngredient->extraPrice * quantidade;
             }
-        }
 
+            printIngredientsUseCase();
+            printf("Digite o ID do ingrediente que deseja adicionar (0 para finalizar): ");
+            scanf("%d", &idIngredients);
+        }
         free(ingredients);
     }
 
@@ -202,8 +234,7 @@ void sellPizza() {
     printf("\nResumo do pedido:\n");
     printf("Pizza: %s (R$ %.2f)\n", foundPizza->flavor, foundPizza->price);
     printf("Adicionais: R$ %.2f\n", precoExtra);
-    printf("Total a pagar: R$ %.2f\n", precoFinal);
+    printf("Total a pagar: R$ %.2f\n\n", precoFinal);
 
     free(pizzas);
 }
-

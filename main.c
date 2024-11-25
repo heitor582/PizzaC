@@ -79,7 +79,7 @@ void menu() {
             case 7:
                 cleanTerminal();
                 printf("Atualizar um ingrediente selecionado.\n");
-                // updateIngredientUseCase();
+                updateIngredientUseCase();
                 printf("\n");
                 break;
             case 8:
@@ -91,8 +91,8 @@ void menu() {
             case 9: 
                 cleanTerminal();
                 printf("Vender pizza selecionado.\n");
-
-                //TODO
+                sellPizzaUseCase();
+                break;
 
             default:
                 cleanTerminal();

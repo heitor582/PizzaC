@@ -35,7 +35,7 @@ Pizza* getAllPizzas(int* count) {
         strncpy(pizzas[i].flavor, token, NAME_SIZE);
 
         token = strtok(NULL, ";");
-        pizzas[i].size = token;
+        pizzas[i].size = token[0];
 
         token = strtok(NULL, ";");
         pizzas[i].ingredientsSize = atoi(token);
@@ -86,7 +86,7 @@ void savePizza(Pizza pizza) {
 }
 
 void savePizzas(Pizza* pizzas, int count) {
-    FILE *f = fopen(PIZZA_FILE_NAME, "wx");
+    FILE *f = fopen(PIZZA_FILE_NAME, "w");
     if (f == NULL) {
         perror("Error opening file");
         exit(1);
@@ -141,7 +141,7 @@ void updatePizza(Pizza pizza) {
 
     for (int i = 0; i < count; i++) {
         if(pizzas[i].id == pizza.id){
-            stpcpy(pizzas[i].flavor,pizza.flavor);
+            strcpy(pizzas[i].flavor,pizza.flavor);
             for (int j = 0; j < 50; j++) {
                 pizzas[i].ingredients[j] = pizza.ingredients[j];
             }
@@ -150,7 +150,7 @@ void updatePizza(Pizza pizza) {
             pizzas[i].size = pizza.size;
         }
     }
-
+    savePizzas(pizzas, count);
     free(pizzas);
     return;
 }
@@ -160,7 +160,12 @@ Pizza* searchPizzaByFlavor(char flavor[NAME_SIZE]){
     Pizza *pizzas = getAllPizzas(&count);
     for (int i =0; i<count; i++) {
         if(strcmp(pizzas[i].flavor,flavor) == 0) {
-            return &pizzas[i];
+            Pizza *found = malloc(sizeof(Pizza));
+            if (found != NULL) {
+                *found = pizzas[i];
+            }
+            free(pizzas);
+            return found; 
         }
     }
     free(pizzas);

@@ -8,5 +8,5 @@ void createPizzaUseCase();
 void printPizzasUseCase();
 void deletePizzaUseCase();
 void updatePizzaUseCase();
-
+void sellPizzaUseCase();
 #endif
