@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<strings.h>
+#include<string.h>
 #include "ingredients.h"
 #include "pizzas.h"
 
