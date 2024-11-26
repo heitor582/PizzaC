@@ -165,7 +165,7 @@ void updatePizzaUseCase() {
     free(pizza);
 }
 
-void sellPizzaUseCase() {
+void sellPizzaUseCase() {  
     printPizzasUseCase();
 
     int procura_id, count;
