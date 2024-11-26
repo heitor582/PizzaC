@@ -16,7 +16,7 @@ Ingredient* getAllIngredients(int* count);
 Ingredient* searchIngredientByName(char name[NAME_SIZE]);
 void updateIngredient(Ingredient ingredient);
 void saveIngredient(Ingredient ingredient);
-void deleteIngredientByName(char name[]);
+void deleteIngredientByName(char name[NAME_SIZE]);
 int getNumberOfIngredients();
 
 #endif
