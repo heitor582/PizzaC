@@ -25,7 +25,7 @@ typedef struct Pizza{
 
 Pizza* getAllPizzas(int* count);
 void savePizza(Pizza pizza);
-void deletePizzaByFlavor(char flavor[]);
+void deletePizzaByFlavor(char flavor[NAME_SIZE]);
 void updatePizza(Pizza pizza);
 Pizza* searchPizzaByFlavor(char flavor[NAME_SIZE]);
 int getNumberOfPizzas();

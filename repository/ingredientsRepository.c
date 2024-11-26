@@ -4,8 +4,13 @@
 #include "ingredientsRepository.h"
 
 Ingredient* getAllIngredientsByIdIn(int ids[], int count) {
-    int allIngredientsCount;
+    int allIngredientsCount, matchedCount=0;
     Ingredient *ingredients = getAllIngredients(&allIngredientsCount);
+    if (ingredients == NULL) {
+        perror("Error allocating array");
+        exit(1);
+    }
+
     Ingredient *filteredIngredients = (Ingredient *) malloc(sizeof(Ingredient)*count);
     if (filteredIngredients == NULL) {
         perror("Error allocating array");
@@ -16,11 +21,12 @@ Ingredient* getAllIngredientsByIdIn(int ids[], int count) {
         for (int j = 0; j < count; j++){
             if(ids[j] == ingredients[i].id){
                 filteredIngredients[j] = ingredients[i];
+                matchedCount++;
             }
         }
     }
     free(ingredients);
-    return filteredIngredients;
+    return matchedCount > 0 ? filteredIngredients : NULL; 
 }
 
 void saveIngredient(Ingredient ingredient) {

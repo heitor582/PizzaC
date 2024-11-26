@@ -13,14 +13,16 @@ void printPizzasUseCase() {
         printf("Sabor: %s\n", pizza.flavor);
         printf("Sabor: %c\n", pizza.size);
         printf("Preço: R$%.2f\n\n", pizza.price);
-        if(pizza.ingredientsSize >0){
+        if(pizza.ingredientsSize > 0){
             printf("Com ingredientes: \n");
             Ingredient *ingredients = getAllIngredientsByIdIn(pizza.ingredients, pizza.ingredientsSize);
-            for (int i =0; i<pizza.ingredientsSize; i++) {
-                printf("\t%s\n", ingredients[i].name);
+            if(ingredients != NULL){
+                for (int i =0; i<pizza.ingredientsSize; i++) {
+                    printf("\t%s\n", ingredients[i].name);
+                }
+                free(ingredients);
+                printf("\n");
             }
-            free(ingredients);
-            printf("\n");
         }
     }
     
@@ -42,6 +44,7 @@ void createPizzaUseCase() {
     char pizza_size;
     printf("Digite o tamanho da pizza: ");
     scanf(" %c", &pizza_size);
+    pizza_size = toupper(pizza_size);
     
     if(pizza_size != P && pizza_size != M && pizza_size != G){
         printf("Não existe esse tamanho");
@@ -49,24 +52,37 @@ void createPizzaUseCase() {
     }
     pizza.size=pizza_size;
 
-    printf("Escreva o id do ingrediente que você quer adicionar na pizza ou digite 0 para sair: \n\n");
-    printIngredientsUseCase();
+    int ingredientsCount = 0;
+    Ingredient *allIngredient = getAllIngredients(&ingredientsCount);
+    if(ingredientsCount == 0 ){
+        printf("Voce nao tem ingredientes cadastrados deseja salvar mesmo assim? (s/n)\n");
+        char resp;
+        scanf(" %c", &resp);
 
-    int value;
-    printf("Ingrediente ID: ");
-    scanf("%d", &value);
-    while (value != 0) {
-        int values[] = {value};
-        Ingredient *ingredient = getAllIngredientsByIdIn(values, 1);
-        if(ingredient != NULL){
-            pizza.ingredients[pizza.ingredientsSize]=value;
-            pizza.ingredientsSize++;
-        } else {
-            printf("Ingrediente não existe");
+        if (tolower(resp) != 's') {
+            return;
         }
-        
+    } else {
+        printf("Escreva o id do ingrediente que você quer adicionar na pizza ou digite 0 para sair: \n\n");
+        printIngredientsUseCase();
+
+        int value;
         printf("Ingrediente ID: ");
         scanf("%d", &value);
+        while (value != 0) {
+            int values[1] = {value};
+            Ingredient *ingredient = getAllIngredientsByIdIn(values, 1);
+            if(ingredient != NULL){
+                pizza.ingredients[pizza.ingredientsSize]=value;
+                pizza.ingredientsSize++;
+                free(ingredient);
+            } else {
+                printf("\nIngrediente não existe");
+            }
+            
+            printf("Ingrediente ID: ");
+            scanf("%d", &value);
+        }
     }
     
     savePizza(pizza);
@@ -173,6 +189,11 @@ void sellPizzaUseCase() {
     scanf("%d", &procura_id);
 
     Pizza *pizzas = getAllPizzas(&count);
+    if(pizzas == NULL || count ==0){
+        printf("Nao tem pizzas cadastradas\n");
+        return;
+    }
+
     Pizza *foundPizza = NULL;
 
     for (int i = 0; i < count && foundPizza == NULL; i++) {
@@ -183,7 +204,6 @@ void sellPizzaUseCase() {
 
     if (foundPizza == NULL) {
         printf("Pizza não encontrada.\n");
-        free(pizzas);
         return;
     }
 
@@ -193,7 +213,7 @@ void sellPizzaUseCase() {
     printf("Deseja adicionar ingredientes extras? (s/n): ");
     scanf(" %c", &addIngredients);
 
-    if (addIngredients == 'S' || addIngredients == 's') {
+    if (tolower(addIngredients) == 's') {
         int idIngredients = -1, quantidade, ingredientCount;
         Ingredient *ingredients = getAllIngredients(&ingredientCount);
 
@@ -237,4 +257,5 @@ void sellPizzaUseCase() {
     printf("Total a pagar: R$ %.2f\n\n", precoFinal);
 
     free(pizzas);
+    return;
 }
