@@ -110,7 +110,7 @@ Ingredient* getAllIngredients(int* count) {
         ingredients[i].id = atoi(token);
 
         token = strtok(NULL, ";");
-        strncpy(ingredients[i].name, token, NAME_SIZE);
+        strcpy(ingredients[i].name, token);
 
         token = strtok(NULL, ";");
         ingredients[i].extraPrice=atof(token);

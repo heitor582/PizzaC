@@ -53,8 +53,7 @@ void createPizzaUseCase() {
     }
     pizza.size=pizza_size;
 
-    int ingredientsCount = 0;
-    getAllIngredients(&ingredientsCount);
+    int ingredientsCount = getNumberOfIngredients();
     if(ingredientsCount == 0 ){
         printf("Voce nao tem ingredientes cadastrados deseja salvar mesmo assim? (s/n)\n");
         char resp;
@@ -70,7 +69,7 @@ void createPizzaUseCase() {
         int value;
         printf("Ingrediente ID: ");
         scanf("%d", &value);
-        while (value != 0) {
+        while (value != 0 && pizza.ingredientsSize < INGREDIENTS_SIZE) {
             int values[1] = {value};
             Ingredient *ingredient = getAllIngredientsByIdIn(values, 1);
             if(ingredient != NULL){
@@ -78,7 +77,7 @@ void createPizzaUseCase() {
                 pizza.ingredientsSize++;
                 free(ingredient);
             } else {
-                printf("\nIngrediente não existe");
+                printf("\nIngrediente não existe\n");
             }
             
             printf("Ingrediente ID: ");
