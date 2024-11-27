@@ -58,7 +58,7 @@ void saveIngredients(Ingredient* ingredients, int count) {
     fclose(f);
 }
 
-void deleteIngredientByName(char name[]){
+void deleteIngredientByName(char name[NAME_SIZE]){
     int count;
     Ingredient *ingredients = getAllIngredients(&count);
 
