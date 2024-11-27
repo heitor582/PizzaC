@@ -6,7 +6,11 @@
 void printIngredientsUseCase(){
     int count;
     Ingredient *ingredients = getAllIngredients(&count);
-    for (int i =0; i<count; i++) {
+    if (ingredients == NULL) {
+        perror("Error for alocating memory");
+        exit(1);
+    }
+    for (int i = 0; i<count; i++) {
         Ingredient ingredient = ingredients[i];
         printf("Ingrediente ID: %d\n", ingredient.id);
         printf("Nome: %s\n", ingredient.name);
