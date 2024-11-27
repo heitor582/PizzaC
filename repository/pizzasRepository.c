@@ -109,7 +109,7 @@ void savePizzas(Pizza* pizzas, int count) {
     fclose(f);
 }
 
-void deletePizzaByFlavor(char flavor[]){
+void deletePizzaByFlavor(char flavor[NAME_SIZE]){
     int count;
     Pizza *pizzas = getAllPizzas(&count);
     

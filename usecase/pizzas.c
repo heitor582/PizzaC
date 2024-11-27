@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<ctype.h>
 #include "ingredients.h"
 #include "pizzas.h"
 
@@ -53,7 +54,7 @@ void createPizzaUseCase() {
     pizza.size=pizza_size;
 
     int ingredientsCount = 0;
-    Ingredient *allIngredient = getAllIngredients(&ingredientsCount);
+    getAllIngredients(&ingredientsCount);
     if(ingredientsCount == 0 ){
         printf("Voce nao tem ingredientes cadastrados deseja salvar mesmo assim? (s/n)\n");
         char resp;
@@ -181,7 +182,7 @@ void updatePizzaUseCase() {
     free(pizza);
 }
 
-void sellPizzaUseCase() {
+void sellPizzaUseCase() {  
     printPizzasUseCase();
 
     int procura_id, count;
