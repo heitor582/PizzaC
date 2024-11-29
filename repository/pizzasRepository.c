@@ -71,7 +71,7 @@ void savePizza(Pizza pizza) {
     char ingredientsLine[MAX_INGREDIENTS_LINE_LENGTH] = "";
     for(int i=0; i<pizza.ingredientsSize; i++){
         int size = MAX_INGREDIENTS_LINE_LENGTH - strlen(ingredientsLine) - 1;
-        char ingredientId[1];
+        char ingredientId[12];
         snprintf(ingredientId, sizeof(ingredientId), "%d", pizza.ingredients[i]);
         strncat(ingredientsLine, ingredientId, size);
         if (i!=pizza.ingredientsSize-1) {
@@ -99,7 +99,7 @@ void savePizzas(Pizza* pizzas, int count) {
         char ingredientsLine[MAX_INGREDIENTS_LINE_LENGTH] = "";
         for(int j=0; j<pizzas[i].ingredientsSize; j++){
             int size = MAX_INGREDIENTS_LINE_LENGTH - strlen(ingredientsLine) - 1;
-            char ingredientId[1];
+            char ingredientId[12];
             snprintf(ingredientId, sizeof(ingredientId), "%d", pizzas[i].ingredients[j]);
             strncat(ingredientsLine, ingredientId, size);
             if (i!=pizzas[i].ingredientsSize-1) {
