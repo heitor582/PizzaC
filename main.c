@@ -95,9 +95,10 @@ void menu() {
                 break;
 
             default:
+                while (getchar() != '\n');
                 cleanTerminal();
-                printf("Opção inválida. Tente novamente.\n");
-                printf("\n");
+                printf("Opção inválida. Tente novamente.\n\n");
+                break;
         }
     } while(value != 0);
     return;

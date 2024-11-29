@@ -8,4 +8,5 @@ void printIngredientsUseCase();
 void createIngredientUseCase();
 void deleteIngredientUseCase();
 void updateIngredientUseCase();
+void printIngredients(Ingredient ingredients[], int count);
 #endif
