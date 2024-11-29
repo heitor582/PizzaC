@@ -62,7 +62,6 @@ Pizza* getAllPizzas(int* count) {
 void savePizza(Pizza pizza) {
     Index index = readIndex();
     index.pizzaId++;
-    writeNewIndex(index);
     FILE *f = fopen(PIZZA_FILE_NAME, "a");
     if (f == NULL) {
         perror("Error opening file");
@@ -72,17 +71,21 @@ void savePizza(Pizza pizza) {
     char ingredientsLine[MAX_INGREDIENTS_LINE_LENGTH] = "";
     for(int i=0; i<pizza.ingredientsSize; i++){
         int size = MAX_INGREDIENTS_LINE_LENGTH - strlen(ingredientsLine) - 1;
-        char ingredientId[2];
+        char ingredientId[1];
         snprintf(ingredientId, sizeof(ingredientId), "%d", pizza.ingredients[i]);
         strncat(ingredientsLine, ingredientId, size);
         if (i!=pizza.ingredientsSize-1) {
             strncat(ingredientsLine, ",", size);
         }
     }
+    if(pizza.ingredientsSize == 0){
+        strcpy(ingredientsLine, "0\0");
+    }
 
     fprintf(f, "%d;%.2f;%s;%c;%d;%s\n", index.pizzaId, pizza.price, pizza.flavor, pizza.size, pizza.ingredientsSize,ingredientsLine);
 
     fclose(f);
+    writeNewIndex(index);
 }
 
 void savePizzas(Pizza* pizzas, int count) {
@@ -96,12 +99,15 @@ void savePizzas(Pizza* pizzas, int count) {
         char ingredientsLine[MAX_INGREDIENTS_LINE_LENGTH] = "";
         for(int j=0; j<pizzas[i].ingredientsSize; j++){
             int size = MAX_INGREDIENTS_LINE_LENGTH - strlen(ingredientsLine) - 1;
-            char ingredientId[2];
+            char ingredientId[1];
             snprintf(ingredientId, sizeof(ingredientId), "%d", pizzas[i].ingredients[j]);
             strncat(ingredientsLine, ingredientId, size);
             if (i!=pizzas[i].ingredientsSize-1) {
                 strncat(ingredientsLine, ",", size);
             }
+        }
+        if(pizzas[i].ingredientsSize == 0){
+            strcpy(ingredientsLine, "0\0");
         }
         fprintf(f, "%d;%.2f;%s;%c;%d;%s\n", pizzas[i].id, pizzas[i].price, pizzas[i].flavor, pizzas[i].size, pizzas[i].ingredientsSize,ingredientsLine);
     }
@@ -142,10 +148,10 @@ void updatePizza(Pizza pizza) {
     for (int i = 0; i < count; i++) {
         if(pizzas[i].id == pizza.id){
             strcpy(pizzas[i].flavor,pizza.flavor);
-            for (int j = 0; j < 50; j++) {
+            pizzas[i].ingredientsSize = pizza.ingredientsSize;
+            for (int j = 0; j < pizza.ingredientsSize; j++) {
                 pizzas[i].ingredients[j] = pizza.ingredients[j];
             }
-            pizzas[i].ingredientsSize = pizza.ingredientsSize;
             pizzas[i].price = pizza.price;
             pizzas[i].size = pizza.size;
         }

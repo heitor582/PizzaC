@@ -35,3 +35,9 @@ $(TARGET): $(OBJ)
 # Clean target to remove build artifacts
 clean:
 	rm -f $(OBJ) $(TARGET)
+
+.PHONY: test
+
+test:
+	@chmod +x ./test/test.sh
+	@./test/test.sh

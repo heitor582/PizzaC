@@ -8,23 +8,28 @@
 void printPizzasUseCase() {
     int count;
     Pizza *pizzas = getAllPizzas(&count);
-    for (int i =0; i<count; i++) {
-        Pizza pizza = pizzas[i];
-        printf("Pizza ID: %d\n", pizza.id);
-        printf("Sabor: %s\n", pizza.flavor);
-        printf("Sabor: %c\n", pizza.size);
-        printf("Preço: R$%.2f\n\n", pizza.price);
-        if(pizza.ingredientsSize > 0){
-            printf("Com ingredientes: \n");
-            Ingredient *ingredients = getAllIngredientsByIdIn(pizza.ingredients, pizza.ingredientsSize);
-            if(ingredients != NULL){
-                for (int i =0; i<pizza.ingredientsSize; i++) {
-                    printf("\t%s\n", ingredients[i].name);
+
+    if(count > 0){
+        for (int i =0; i<count; i++) {
+            Pizza pizza = pizzas[i];
+            printf("Pizza ID: %d\n", pizza.id);
+            printf("Sabor: %s\n", pizza.flavor);
+            printf("Sabor: %c\n", pizza.size);
+            printf("Preço: R$%.2f\n\n", pizza.price);
+            if(pizza.ingredientsSize > 0){
+                printf("Com ingredientes: \n");
+                Ingredient *ingredients = getAllIngredientsByIdIn(pizza.ingredients, pizza.ingredientsSize);
+                if(ingredients != NULL){
+                    for (int i =0; i<pizza.ingredientsSize; i++) {
+                        printf("\t%s\n", ingredients[i].name);
+                    }
+                    free(ingredients);
+                    printf("\n");
                 }
-                free(ingredients);
-                printf("\n");
             }
         }
+    }else {
+        printf("Nao ha ingredientes cadastrados\n");
     }
     
     printf("\n");
@@ -52,10 +57,11 @@ void createPizzaUseCase() {
         return;
     }
     pizza.size=pizza_size;
+    pizza.ingredientsSize=0;
 
     int ingredientsCount = getNumberOfIngredients();
     if(ingredientsCount == 0 ){
-        printf("Voce nao tem ingredientes cadastrados deseja salvar mesmo assim? (s/n)\n");
+        printf("Voce nao tem ingredientes cadastrados deseja salvar mesmo assim? (s/n): ");
         char resp;
         scanf(" %c", &resp);
 
@@ -143,7 +149,13 @@ void updatePizzaUseCase() {
                 break;
             case 3:
                 printf("Opção selecionada: Adicionar ingredientes à pizza.\n");
+                int ingredientsSize = getNumberOfIngredients();
+                if(ingredientsSize == 0){
+                    printf("Nao existe ingredietes cadastrados");
+                    return;
+                }
                 printIngredientsUseCase();
+                printf("Digite o id do ingrediente desejado: ");
                 int idIngrediente;
                 scanf("%d", &idIngrediente);
                 if(pizza->ingredientsSize == INGREDIENTS_SIZE){
@@ -156,13 +168,19 @@ void updatePizzaUseCase() {
                 break;
             case 4:
                 printf("Opção selecionada: Remover ingredientes da pizza.\n");
-                printIngredientsUseCase();
-                int idIngredienteRemove;
-                scanf("%d", &idIngredienteRemove);
+                
                 if(pizza->ingredientsSize == 0){
-                    printf("A quantidade de ingredientes da pizza já está no minimo");
+                    printf("A pizza nao tem mais ingredientes");
                     return;
                 }
+
+                Ingredient* ingredients = getAllIngredientsByIdIn(pizza->ingredients, pizza->ingredientsSize-1);
+                printIngredients(ingredients, pizza->ingredientsSize-1);
+
+                printf("Digite o id do ingrediente desejado: ");
+                int idIngredienteRemove;
+                scanf("%d", &idIngredienteRemove);
+                
                 for(int i = 0; i<pizza->ingredientsSize; i++){
                     if(pizza->ingredients[i] == idIngredienteRemove){
                         pizza->ingredients[i] = pizza->ingredients[pizza->ingredientsSize];
@@ -173,7 +191,9 @@ void updatePizzaUseCase() {
                 printf("\n");
                 break;
             default:
+                while (getchar() != '\n');
                 printf("Opção inválida. Tente novamente.\n");
+                break;
         }
     } while(value != 0);
 

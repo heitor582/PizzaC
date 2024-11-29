@@ -10,15 +10,17 @@ void printIngredientsUseCase(){
         perror("Error for alocating memory");
         exit(1);
     }
+    printIngredients(ingredients, count);
+    free(ingredients);
+}
+
+void printIngredients(Ingredient ingredients[], int count) {
     for (int i = 0; i<count; i++) {
         Ingredient ingredient = ingredients[i];
         printf("Ingrediente ID: %d\n", ingredient.id);
         printf("Nome: %s\n", ingredient.name);
-        printf("Preço: R$%.2f\n\n", ingredient.extraPrice);
+        printf("Preço: R$%.2f\n", ingredient.extraPrice);
     }
-
-    printf("\n");
-    free(ingredients);
 }
 
 void createIngredientUseCase(){
@@ -88,10 +90,12 @@ void updateIngredientUseCase(){
                 printf("\n");
                 break;
             default:
+                while (getchar() != '\n');
                 printf("Opção inválida. Tente novamente.\n");
+                break;
         }
     } while(value != 0);
 
     updateIngredient(*ingredient);
     free(ingredient);
-};
+}
