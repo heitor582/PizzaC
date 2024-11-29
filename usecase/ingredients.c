@@ -28,11 +28,11 @@ void createIngredientUseCase(){
 
     Ingredient ingredient;
 
-    printf("Digite o nome do ingredient: ");
+    printf("Digite o nome do ingrediente: ");
     fgets(ingredient.name, NAME_SIZE, stdin);
     ingredient.name[strcspn(ingredient.name, "\n")] = '\0';
 
-    printf("Digite o preço extra do ingredient: ");
+    printf("Digite o preço extra do ingrediente: ");
     scanf("%f", &ingredient.extraPrice);
     
     saveIngredient(ingredient);
