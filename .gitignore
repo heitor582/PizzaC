@@ -8,3 +8,6 @@ pizza
 *.log
 *.tmp
 pub.actual.out
+*.exe
+*.csv
+*.bin

@@ -9,4 +9,5 @@ void printPizzasUseCase();
 void deletePizzaUseCase();
 void updatePizzaUseCase();
 void sellPizzaUseCase();
+void printPizzas(Pizza pizzas[], int count);
 #endif

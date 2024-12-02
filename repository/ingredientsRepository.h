@@ -13,10 +13,11 @@ typedef struct Ingredient{
 
 Ingredient* getAllIngredientsByIdIn(int ids[], int count);
 Ingredient* getAllIngredients(int* count);
-Ingredient* searchIngredientByName(char name[NAME_SIZE]);
+Ingredient* searchIngredientByName(char name[NAME_SIZE], int* count);
+Ingredient* searchIngredientById(int id);
 void updateIngredient(Ingredient ingredient);
 void saveIngredient(Ingredient ingredient);
-void deleteIngredientByName(char name[NAME_SIZE]);
+void deleteIngredientById(int id);
 int getNumberOfIngredients();
 
 #endif

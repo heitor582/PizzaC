@@ -1,43 +1,4 @@
-[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2JMenu de Opções:
-0 - Sair
-1 - Cadastrar uma pizza
-2 - Ver todas as pizzas
-3 - Atualizar uma pizza
-4 - Deletar uma pizza
-5 - Cadastrar um ingrediente
-6 - Ver todos os ingredientes
-7 - Atualizar um ingrediente
-8 - Deletar um ingrediente
-9 - Vender pizza
-Escolha uma opção: Opção inválida. Tente novamente.
-
-Menu de Opções:
-0 - Sair
-1 - Cadastrar uma pizza
-2 - Ver todas as pizzas
-3 - Atualizar uma pizza
-4 - Deletar uma pizza
-5 - Cadastrar um ingrediente
-6 - Ver todos os ingredientes
-7 - Atualizar um ingrediente
-8 - Deletar um ingrediente
-9 - Vender pizza
-Escolha uma opção: Opção inválida. Tente novamente.
-
-Menu de Opções:
-0 - Sair
-1 - Cadastrar uma pizza
-2 - Ver todas as pizzas
-3 - Atualizar uma pizza
-4 - Deletar uma pizza
-5 - Cadastrar um ingrediente
-6 - Ver todos os ingredientes
-7 - Atualizar um ingrediente
-8 - Deletar um ingrediente
-9 - Vender pizza
-Escolha uma opção: Opção inválida. Tente novamente.
-
-Menu de Opções:
+[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2JMenu de Opções:
 0 - Sair
 1 - Cadastrar uma pizza
 2 - Ver todas as pizzas
@@ -63,39 +24,11 @@ Menu de Opções:
 9 - Vender pizza
 Escolha uma opção: Ver todas as pizzas selecionado.
 Pizza ID: 1
-Sabor: Calabresa
+Sabor: calabresa
 Sabor: G
-Preço: R$35.50
+Preço: R$45.57
 
 
-
-Menu de Opções:
-0 - Sair
-1 - Cadastrar uma pizza
-2 - Ver todas as pizzas
-3 - Atualizar uma pizza
-4 - Deletar uma pizza
-5 - Cadastrar um ingrediente
-6 - Ver todos os ingredientes
-7 - Atualizar um ingrediente
-8 - Deletar um ingrediente
-9 - Vender pizza
-Escolha uma opção: Atualizar uma pizza selecionado.
-Digite o sabor da pizza que quer alterar: Menu de Opções Atualização da pizza:
-0 - Sair
-1 - Atualizar sabor da pizza
-2 - Atualizar valor da pizza
-3 - Adicionar ingredientes à pizza
-4 - Remover ingredientes da pizza
-Escolha uma opção: Opção selecionada: Atualizar valor da pizza.
-Digite o preço da pizza: 
-Menu de Opções Atualização da pizza:
-0 - Sair
-1 - Atualizar sabor da pizza
-2 - Atualizar valor da pizza
-3 - Adicionar ingredientes à pizza
-4 - Remover ingredientes da pizza
-Escolha uma opção: Saindo da atualização da pizza...
 
 Menu de Opções:
 0 - Sair
@@ -109,7 +42,20 @@ Menu de Opções:
 8 - Deletar um ingrediente
 9 - Vender pizza
 Escolha uma opção: Cadastrar um ingrediente selecionado.
-Digite o nome do ingredient: Digite o preço extra do ingredient: 
+Digite o nome do ingrediente: Digite o preço extra do ingrediente: 
+Menu de Opções:
+0 - Sair
+1 - Cadastrar uma pizza
+2 - Ver todas as pizzas
+3 - Atualizar uma pizza
+4 - Deletar uma pizza
+5 - Cadastrar um ingrediente
+6 - Ver todos os ingredientes
+7 - Atualizar um ingrediente
+8 - Deletar um ingrediente
+9 - Vender pizza
+Escolha uma opção: Cadastrar um ingrediente selecionado.
+Digite o nome do ingrediente: Digite o preço extra do ingrediente: 
 Menu de Opções:
 0 - Sair
 1 - Cadastrar uma pizza
@@ -123,32 +69,11 @@ Menu de Opções:
 9 - Vender pizza
 Escolha uma opção: Ver todos os ingredientes selecionado.
 Ingrediente ID: 1
-Nome: Queijo
-Preço: R$2.50
-
-Menu de Opções:
-0 - Sair
-1 - Cadastrar uma pizza
-2 - Ver todas as pizzas
-3 - Atualizar uma pizza
-4 - Deletar uma pizza
-5 - Cadastrar um ingrediente
-6 - Ver todos os ingredientes
-7 - Atualizar um ingrediente
-8 - Deletar um ingrediente
-9 - Vender pizza
-Escolha uma opção: Atualizar um ingrediente selecionado.
-Digite o ingrediente que quer alterar: Menu de Opções Atualização do ingrediente:
-0 - Sair
-1 - Atualizar nome do ingrediente
-2 - Atualizar valor do ingrediente
-Escolha uma opção: Opção selecionada: Atualizar valor do ingrediente.
-Digite o novo preço do ingrediente: 
-Menu de Opções Atualização do ingrediente:
-0 - Sair
-1 - Atualizar nome do ingrediente
-2 - Atualizar valor do ingrediente
-Escolha uma opção: Saindo da [3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2Jatualização do ingrediente...
+Nome: calabresa
+Preço: R$2.90
+Ingrediente ID: 2
+Nome: queijo
+Preço: R$2.00
 
 Menu de Opções:
 0 - Sair
@@ -162,7 +87,28 @@ Menu de Opções:
 8 - Deletar um ingrediente
 9 - Vender pizza
 Escolha uma opção: Atualizar uma pizza selecionado.
-Digite o sabor da pizza que quer alterar: Menu de Opções Atualização da pizza:
+Digite o sabor da pizza que quer alterar: Pizza ID: 1
+Sabor: calabresa
+Sabor: G
+Preço: R$45.57
+
+Confirme o id da pizza a ser atualizada: Menu de Opções Atualização da pizza:
+0 - Sair
+1 - Atualizar sabor da pizza
+2 - Atualizar valor da pizza
+3 - Adicionar ingredientes à pizza
+4 - Remover ingredientes da pizza
+Escolha uma opção: Opção selecionada: Atualizar sabor da pizza.
+Digite o sabor da pizza: 
+Menu de Opções Atualização da pizza:
+0 - Sair
+1 - Atualizar sabor da pizza
+2 - Atualizar valor da pizza
+3 - Adicionar ingredientes à pizza
+4 - Remover ingredientes da pizza
+Escolha uma opção: Opção selecionada: Atualizar valor da pizza.
+Digite o preço da pizza: 
+Menu de Opções Atualização da pizza:
 0 - Sair
 1 - Atualizar sabor da pizza
 2 - Atualizar valor da pizza
@@ -170,8 +116,25 @@ Digite o sabor da pizza que quer alterar: Menu de Opções Atualização da pizz
 4 - Remover ingredientes da pizza
 Escolha uma opção: Opção selecionada: Adicionar ingredientes à pizza.
 Ingrediente ID: 1
-Nome: Queijo
-Preço: R$3.00
+Nome: calabresa
+Preço: R$2.90
+Ingrediente ID: 2
+Nome: queijo
+Preço: R$2.00
+Digite o id do ingrediente desejado: 
+Menu de Opções Atualização da pizza:
+0 - Sair
+1 - Atualizar sabor da pizza
+2 - Atualizar valor da pizza
+3 - Adicionar ingredientes à pizza
+4 - Remover ingredientes da pizza
+Escolha uma opção: Opção selecionada: Adicionar ingredientes à pizza.
+Ingrediente ID: 1
+Nome: calabresa
+Preço: R$2.90
+Ingrediente ID: 2
+Nome: queijo
+Preço: R$2.00
 Digite o id do ingrediente desejado: 
 Menu de Opções Atualização da pizza:
 0 - Sair
@@ -180,8 +143,11 @@ Menu de Opções Atualização da pizza:
 3 - Adicionar ingredientes à pizza
 4 - Remover ingredientes da pizza
 Escolha uma opção: Opção selecionada: Remover ingredientes da pizza.
+Ingrediente ID: 1
+Nome: calabresa
+Preço: R$2.90
 Digite o id do ingrediente desejado: 
-Menu de Opções Atualização da pizza:
+Men[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2J[3J[H[2Ju de Opções Atualização da pizza:
 0 - Sair
 1 - Atualizar sabor da pizza
 2 - Atualizar valor da pizza
@@ -200,8 +166,16 @@ Menu de Opções:
 7 - Atualizar um ingrediente
 8 - Deletar um ingrediente
 9 - Vender pizza
-Escolha uma opção: Deletar um ingrediente selecionado.
-Digite o nome do ingrediente para deletar: Ingrediente 'Queijo' excluído com sucesso!
+Escolha uma opção: Deletar uma pizza selecionado.
+Digite o sabor da pizza que quer deletar: Pizza ID: 1
+Sabor: calabresa picante
+Sabor: G
+Preço: R$35.60
+
+Com ingredientes: 
+	calabresa
+
+Confirme o id da pizza a ser deletado: Pizza com '1' excluído com sucesso!
 
 Menu de Opções:
 0 - Sair
@@ -214,19 +188,105 @@ Menu de Opções:
 7 - Atualizar um ingrediente
 8 - Deletar um ingrediente
 9 - Vender pizza
-Escolha uma opção: Ver todas as pizzas selecionado.
-Pizza ID: 1
-Sabor: Calabresa
-Sabor: G
-Preço: R$40.00
-
-
+Escolha uma opção: Cadastrar um ingrediente selecionado.
+Digite o nome do ingrediente: Digite o preço extra do ingrediente: 
+Menu de Opções:
+0 - Sair
+1 - Cadastrar uma pizza
+2 - Ver todas as pizzas
+3 - Atualizar uma pizza
+4 - Deletar uma pizza
+5 - Cadastrar um ingrediente
+6 - Ver todos os ingredientes
+7 - Atualizar um ingrediente
+8 - Deletar um ingrediente
+9 - Vender pizza
+Escolha uma opção: Atualizar um ingrediente selecionado.
+Digite o ingrediente que quer alterar: Ingrediente ID: 3
+Nome: pomodoro
+Preço: R$2.75
+Confirme o id do ingrediente a ser atualizado: Menu de Opções Atualização do ingrediente:
+0 - Sair
+1 - Atualizar nome do ingrediente
+2 - Atualizar valor do ingrediente
+Escolha uma opção: Opção selecionada: Atualizar sabor do ingrediente.
+Digite o novo sabor do ingrediente: 
+Menu de Opções Atualização do ingrediente:
+0 - Sair
+1 - Atualizar nome do ingrediente
+2 - Atualizar valor do ingrediente
+Escolha uma opção: Opção selecionada: Atualizar valor do ingrediente.
+Digite o novo preço do ingrediente: 
+Menu de Opções Atualização do ingrediente:
+0 - Sair
+1 - Atualizar nome do ingrediente
+2 - Atualizar valor do ingrediente
+Escolha uma opção: Saindo da atualização do ingrediente...
 
 Menu de Opções:
 0 - Sair
 1 - Cadastrar uma pizza
 2 - Ver todas as pizzas
 3 - Atualizar uma pizza
+4 - Deletar uma pizza
+5 - Cadastrar um ingrediente
+6 - Ver todos os ingredientes
+7 - Atualizar um ingrediente
+8 - Deletar um ingrediente
+9 - Vender pizza
+Escolha uma opção: Deletar um ingrediente selecionado.
+Digite o nome do ingrediente para deletar: Ingrediente ID: 3
+Nome: tomate
+Preço: R$3.00
+Confirme o id do ingrediente a ser deletado: Ingrediente com '3' excluído com sucesso!
+
+Menu de Opções:
+0 - Sair
+1 - Cadastrar uma pizza
+2 - Ver todas as pizzas
+3 - Atualizar uma pizza
+4 - Deletar uma pizza
+5 - Cadastrar um ingrediente
+6 - Ver todos os ingredientes
+7 - Atualizar um ingrediente
+8 - Deletar um ingrediente
+9 - Vender pizza
+Escolha uma opção: Cadastrar uma pizza selecionado.
+Digite o sabor da pizza: Digite o preço da pizza: Digite o tamanho da pizza: Escreva o id do ingrediente que você quer adicionar na pizza ou digite 0 para sair: 
+
+Ingrediente ID: 1
+Nome: calabresa
+Preço: R$2.90
+Ingrediente ID: 2
+Nome: queijo
+Preço: R$2.00
+Ingrediente ID: Ingrediente ID: Ingrediente ID: Ingrediente ID: Ingrediente ID: 
+Menu de Opções:
+0 - Sair
+1 - Cadastrar uma pizza
+2 - Ver todas as pizzas
+3 - Atualizar uma pizza
+4 - Deletar uma pizza
+5 - Cadastrar um ingrediente
+6 - Ver todos os ingredientes
+7 - Atualizar um ingrediente
+8 - Deletar um ingrediente
+9 - Vender pizza
+Escolha uma opção: Cadastrar uma pizza selecionado.
+Digite o sabor da pizza: Digite o preço da pizza: Digite o tamanho da pizza: Escreva o id do ingrediente que você quer adicionar na pizza ou digite 0 para sair: 
+
+Ingrediente ID: 1
+Nome: calabresa
+Preço: R$2.90
+Ingrediente ID: 2
+Nome: queijo
+Preço: R$2.00
+Ingrediente ID: Ingrediente ID: Ingrediente ID: Ingrediente ID: 
+Menu de Opções:
+0 - Sair
+1 - Cadastrar uma pizza
+2 - Ver todas as pizzas
+3 - Atualizar[3J[H[2J[3J[H[2J uma pizza
 4 - Deletar uma pizza
 5 - Cadastrar um ingrediente
 6 - Ver todos os ingredientes
@@ -234,31 +294,45 @@ Menu de Opções:
 8 - Deletar um ingrediente
 9 - Vender pizza
 Escolha uma opção: Vender pizza selecionado.
-Pizza ID: 1
-Sabor: Calabresa
+Pizza ID: 2
+Sabor: 4 queijos
+Sabor: M
+Preço: R$39.40
+
+Com ingredientes: 
+	queijo
+	queijo
+	queijo
+	queijo
+
+Pizza ID: 3
+Sabor: 3 queijos
 Sabor: G
 Preço: R$40.00
 
+Com ingredientes: 
+	queijo
+	queijo
+	queijo
 
-Selecione o ID da pizza que quer vender: Deseja adicionar ingredientes extras? (s/n): 
+
+Selecione o ID da pizza que quer vender: Deseja adicionar ingredientes extras? (s/n): Ingrediente ID: 1
+Nome: calabresa
+Preço: R$2.90
+Ingrediente ID: 2
+Nome: queijo
+Preço: R$2.00
+Digite o ID do ingrediente que deseja adicionar (0 para finalizar): Digite a quantidade do ingrediente adicional: Ingrediente ID: 1
+Nome: calabresa
+Preço: R$2.90
+Ingrediente ID: 2
+Nome: queijo
+Preço: R$2.00
+Digite o ID do ingrediente que deseja adicionar (0 para finalizar): 
 Resumo do pedido:
-Pizza: Calabresa (R$ 40.00)
-Adicionais: R$ 0.00
-Total a pagar: R$ 40.00
-
-Menu de Opções:
-0 - Sair
-1 - Cadastrar uma pizza
-2 - Ver todas as pizzas
-3 - Atualizar uma pizza
-4 - Deletar uma pizza
-5 - Cadastrar um ingrediente
-6 - Ver todos os ingredientes
-7 - Atualizar um ingrediente
-8 - Deletar um ingrediente
-9 - Vender pizza
-Escolha uma opção: Deletar uma pizza selecionado.
-Digite o sabor da pizza que quer deletar: Pizza 'Calabresa' excluído com sucesso!
+Pizza: 4 queijos (R$ 39.40)
+Adicionais: R$ 5.80
+Total a pagar: R$ 45.20
 
 Menu de Opções:
 0 - Sair

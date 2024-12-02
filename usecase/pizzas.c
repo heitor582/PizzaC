@@ -9,6 +9,13 @@ void printPizzasUseCase() {
     int count;
     Pizza *pizzas = getAllPizzas(&count);
 
+    printPizzas(pizzas, count);    
+    
+    printf("\n");
+    free(pizzas);
+}
+
+void printPizzas(Pizza pizzas[], int count){
     if(count > 0){
         for (int i =0; i<count; i++) {
             Pizza pizza = pizzas[i];
@@ -29,11 +36,8 @@ void printPizzasUseCase() {
             }
         }
     }else {
-        printf("Nao ha ingredientes cadastrados\n");
+        printf("Nao ha pizzas cadastrados\n");
     }
-    
-    printf("\n");
-    free(pizzas);
 }
 
 void createPizzaUseCase() {
@@ -100,7 +104,21 @@ void deletePizzaUseCase() {
     printf("Digite o sabor da pizza que quer deletar: ");
     fgets(flavorForDelete, NAME_SIZE, stdin);
     flavorForDelete[strcspn(flavorForDelete, "\n")] = '\0';
-    deletePizzaByFlavor(flavorForDelete);
+
+    int count = 0;
+    Pizza* pizzas = searchPizzaByFlavor(flavorForDelete, &count);
+    if(count == 0 || pizzas == NULL){
+        printf("Pizzas com sabor %s nao existem /n", flavorForDelete);
+        return;
+    }
+    printPizzas(pizzas, count);
+    free(pizzas);
+
+    int id;
+    printf("Confirme o id da pizza a ser deletado: ");
+    scanf("%d", &id);
+
+    deletePizzaById(id);
 }
 
 void updatePizzaUseCase() {
@@ -110,11 +128,24 @@ void updatePizzaUseCase() {
     fgets(flavorForUpdate, NAME_SIZE, stdin);
     flavorForUpdate[strcspn(flavorForUpdate, "\n")] = '\0';
 
-    Pizza *pizza = searchPizzaByFlavor(flavorForUpdate);
+    int count =0;
+    Pizza *pizzas = searchPizzaByFlavor(flavorForUpdate, &count);
 
-    if(pizza == NULL){
-        printf("Pizza de sabor %s não encontrada", flavorForUpdate);
+    if(pizzas == NULL || count == 0){
+        printf("Pizzas de sabor %s não encontrada", flavorForUpdate);
         return;
+    }
+
+    printPizzas(pizzas, count);
+    free(pizzas);
+
+    int id;
+    printf("Confirme o id da pizza a ser atualizada: ");
+    scanf("%d", &id);
+    Pizza* pizza = searchPizzaById(id);
+    if(pizza == NULL){
+        printf("Pizza de sabor %s e de id %d não encontrada", flavorForUpdate, id);
+        return;   
     }
 
     int value;
@@ -204,26 +235,14 @@ void updatePizzaUseCase() {
 void sellPizzaUseCase() {  
     printPizzasUseCase();
 
-    int procura_id, count;
+    int searchId;
     printf("Selecione o ID da pizza que quer vender: ");
-    scanf("%d", &procura_id);
+    scanf("%d", &searchId);
 
-    Pizza *pizzas = getAllPizzas(&count);
-    if(pizzas == NULL || count ==0){
-        printf("Nao tem pizzas cadastradas\n");
-        return;
-    }
-
-    Pizza *foundPizza = NULL;
-
-    for (int i = 0; i < count && foundPizza == NULL; i++) {
-        if (procura_id == pizzas[i].id) {
-            foundPizza = &pizzas[i];
-        }
-    }
+    Pizza *foundPizza = searchPizzaById(searchId);
 
     if (foundPizza == NULL) {
-        printf("Pizza não encontrada.\n");
+        printf("Pizza com id %d não encontrada.\n", searchId);
         return;
     }
 
@@ -276,6 +295,6 @@ void sellPizzaUseCase() {
     printf("Adicionais: R$ %.2f\n", precoExtra);
     printf("Total a pagar: R$ %.2f\n\n", precoFinal);
 
-    free(pizzas);
+    free(foundPizza);
     return;
 }

@@ -28,11 +28,11 @@ void createIngredientUseCase(){
 
     Ingredient ingredient;
 
-    printf("Digite o nome do ingredient: ");
+    printf("Digite o nome do ingrediente: ");
     fgets(ingredient.name, NAME_SIZE, stdin);
     ingredient.name[strcspn(ingredient.name, "\n")] = '\0';
 
-    printf("Digite o preço extra do ingredient: ");
+    printf("Digite o preço extra do ingrediente: ");
     scanf("%f", &ingredient.extraPrice);
     
     saveIngredient(ingredient);
@@ -44,7 +44,19 @@ void deleteIngredientUseCase(){
     printf("Digite o nome do ingrediente para deletar: ");
     fgets(ingredientName, NAME_SIZE, stdin);
     ingredientName[strcspn(ingredientName, "\n")] = '\0';
-    deleteIngredientByName(ingredientName);
+
+    int count = 0;
+    Ingredient* ingredients = searchIngredientByName(ingredientName, &count);
+    if(count == 0 || ingredients == NULL){
+        printf("Ingredientes com nome %s nao existem", ingredientName);
+    }
+    printIngredients(ingredients, count);
+    free(ingredients);
+
+    int id;
+    printf("Confirme o id do ingrediente a ser deletado: ");
+    scanf("%d", &id);
+    deleteIngredientById(id);
 }
 
 void updateIngredientUseCase(){
@@ -53,11 +65,24 @@ void updateIngredientUseCase(){
     printf("Digite o ingrediente que quer alterar: ");
     fgets(nameForUpdate, NAME_SIZE, stdin);
     nameForUpdate[strcspn(nameForUpdate, "\n")] = '\0';
-    
-    Ingredient *ingredient = searchIngredientByName(nameForUpdate);
+
+    int count = 0;
+    Ingredient *ingredients = searchIngredientByName(nameForUpdate, &count);
+    if(count == 0 || ingredients == NULL){
+        printf("Ingredientes com nome %s nao existem", nameForUpdate);
+        return;
+    }
+    printIngredients(ingredients, count);
+    free(ingredients);
+
+    int id;
+    printf("Confirme o id do ingrediente a ser atualizado: ");
+    scanf("%d", &id);
+
+    Ingredient *ingredient = searchIngredientById(id);
 
     if(ingredient == NULL){
-        printf("Ingrediente %s não encontrada", nameForUpdate);
+        printf("Ingrediente %s com id %d não encontrada", nameForUpdate, id);
         return;
     }
 
