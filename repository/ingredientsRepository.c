@@ -58,15 +58,19 @@ void saveIngredients(Ingredient* ingredients, int count) {
     fclose(f);
 }
 
-void deleteIngredientByName(char name[NAME_SIZE]){
+void deleteIngredientById(int id){
     int count;
     Ingredient *ingredients = getAllIngredients(&count);
+    if(ingredients == NULL) {
+        perror("Memory allocation failed");
+        exit(1);
+    }
 
     int found = 0;
     int newCount = 0;
     
     for (int i = 0; i < count; i++) {
-        if (strcmp(ingredients[i].name, name) == 0) {
+        if (ingredients[i].id == id) {
             found = 1;
         } else {
             ingredients[newCount] = ingredients[i];
@@ -75,10 +79,10 @@ void deleteIngredientByName(char name[NAME_SIZE]){
     }
 
     if (found) {
-        printf("Ingrediente '%s' excluído com sucesso!\n", name);
+        printf("Ingrediente com '%d' excluído com sucesso!\n", id);
         saveIngredients(ingredients, newCount);
     } else {
-        printf("Ingrediente '%s' não encontrado!\n", name);
+        printf("Ingrediente com '%d' não encontrado!\n", id);
     }
 
     free(ingredients);
@@ -127,11 +131,39 @@ int getNumberOfIngredients() {
     return countItemsOnAFile(INGREDIENTS_FILE_NAME);
 }
 
-Ingredient* searchIngredientByName(char name[NAME_SIZE]) {
+Ingredient* searchIngredientByName(char name[NAME_SIZE], int* count) {
+    int countAll = 0;
+    Ingredient *ingredients = getAllIngredients(&countAll);
+    if(ingredients == NULL) {
+        perror("Memory allocation failed");
+        exit(1);
+    }
+    Ingredient *found = malloc(sizeof(Ingredient)*countAll);
+     if(found == NULL) {
+        perror("Memory allocation failed");
+        exit(1);
+    }
+    for (int i =0; i<countAll; i++) {
+        if(strcmp(ingredients[i].name, name) == 0){
+            found[*count] = ingredients[i];
+            (*count)++;
+        }
+    }
+
+    free(ingredients);    
+    return found;
+}
+
+Ingredient* searchIngredientById(int id) {
     int count;
     Ingredient *ingredients = getAllIngredients(&count);
+    if(ingredients == NULL) {
+        perror("Memory allocation failed");
+        exit(1);
+    }
+
     for (int i =0; i<count; i++) {
-        if(strcmp(ingredients[i].name, name) == 0){
+        if(ingredients[i].id==id){
             Ingredient *found = malloc(sizeof(Ingredient));
             if (found != NULL) {
                 *found = ingredients[i];

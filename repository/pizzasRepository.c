@@ -115,15 +115,19 @@ void savePizzas(Pizza* pizzas, int count) {
     fclose(f);
 }
 
-void deletePizzaByFlavor(char flavor[NAME_SIZE]){
+void deletePizzaById(int id){
     int count;
     Pizza *pizzas = getAllPizzas(&count);
+    if(pizzas == NULL){
+        perror("Memory allocation failed");
+        exit(1);
+    }
     
     int found = 0;
     int newCount = 0;
     
     for (int i = 0; i < count; i++) {
-        if (strcmp(pizzas[i].flavor, flavor) == 0) {
+        if (pizzas[i].id == id) {
             found = 1;
         } else {
             pizzas[newCount] = pizzas[i];
@@ -132,10 +136,10 @@ void deletePizzaByFlavor(char flavor[NAME_SIZE]){
     }
 
     if (found) {
-        printf("Pizza '%s' excluído com sucesso!\n", flavor);
+        printf("Pizza com '%d' excluído com sucesso!\n", id);
         savePizzas(pizzas, newCount);
     } else {
-        printf("Pizza '%s' não encontrado!\n", flavor);
+        printf("Pizza com '%d' não encontrado!\n", id);
     }
 
     free(pizzas);
@@ -161,11 +165,37 @@ void updatePizza(Pizza pizza) {
     return;
 }
 
-Pizza* searchPizzaByFlavor(char flavor[NAME_SIZE]){
+Pizza* searchPizzaByFlavor(char flavor[NAME_SIZE], int* count){
+    int countAll;
+    Pizza *pizzas = getAllPizzas(&countAll);
+    if(pizzas == NULL) {
+        perror("Memory allocation failed");
+        exit(1);
+    }
+    Pizza *found = malloc(sizeof(Pizza)*countAll);
+    if(found == NULL) {
+        perror("Memory allocation failed");
+        exit(1);
+    }
+    for (int i =0; i<countAll; i++) {
+        if(strcmp(pizzas[i].flavor,flavor) == 0) {
+            found[*count] = pizzas[i];
+            (*count)++;
+        }
+    }
+    free(pizzas);
+    return found;
+}
+
+Pizza* searchPizzaById(int id){
     int count;
     Pizza *pizzas = getAllPizzas(&count);
+    if(pizzas == NULL) {
+        perror("Memory allocation failed");
+        exit(1);
+    }
     for (int i =0; i<count; i++) {
-        if(strcmp(pizzas[i].flavor,flavor) == 0) {
+        if(pizzas[i].id == id) {
             Pizza *found = malloc(sizeof(Pizza));
             if (found != NULL) {
                 *found = pizzas[i];

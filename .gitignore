@@ -8,3 +8,7 @@ pizza
 *.log
 *.tmp
 pub.actual.out
+*.exe
+./db/pizza.csv
+./db/ingredients.csv
+./db/index.bin
