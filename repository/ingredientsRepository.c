@@ -32,7 +32,6 @@ Ingredient* getAllIngredientsByIdIn(int ids[], int count) {
 void saveIngredient(Ingredient ingredient) {
     Index index = readIndex();
     index.ingredientId++;
-    writeNewIndex(index);
     FILE *f = fopen(INGREDIENTS_FILE_NAME, "a");
     if (f == NULL) {
         perror("Error opening file");
@@ -41,6 +40,7 @@ void saveIngredient(Ingredient ingredient) {
 
     fprintf(f, "%d;%s;%.2f\n", index.ingredientId, ingredient.name, ingredient.extraPrice);
 
+    writeNewIndex(index);
     fclose(f);
 }
 
